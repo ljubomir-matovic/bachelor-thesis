@@ -67,8 +67,13 @@ spec:
   worker:
     replicas: 2 # specifying number of workers
     spec:
+      volumes:
+        - name: <volume-name> # you can use volumes for storing .csv files
+          hostPath:
+            path: <your-path>
+            type: DirectoryOrCreate
       containers:
-      - name: worker
+        - name: worker
         image: "ghcr.io/dask/dask:latest"
         imagePullPolicy: "IfNotPresent"
         env:
